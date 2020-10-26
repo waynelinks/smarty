@@ -4,6 +4,9 @@
   "description": "Basic authentication service",
   "main": "dist/server.js",
   "license": "MIT",
+  "engines": {
+    "node": ">= 12.19.0"
+  },
   "scripts": {
     "build": "yarn clean && tsc",
     "clean": "rimraf dist",
