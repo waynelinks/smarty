@@ -11,6 +11,8 @@
     "build": "yarn clean && tsc",
     "clean": "rimraf dist",
     "tsc": "tsc",
+    "start": "yarn build && env-cmd -f .env node dist/server.js",
+    "dev": "env-cmd -f .env.dev tsnd --respawn ./src/server.ts",
     "test": "env-cmd -f .env.test jest --watchAll --no-cache --runInBand --detectOpenHandles",
     "lint": "eslint --fix ./src --ext .js,.ts"
   },
@@ -28,9 +30,13 @@
     "rimraf": "^3.0.2",
     "supertest": "^5.0.0",
     "ts-jest": "^26.4.2",
+    "ts-node-dev": "^1.0.0",
     "typescript": "^4.0.3"
   },
   "dependencies": {
+    "@bigoncloud/errors": "^1.0.6",
+    "@bigoncloud/logger": "^1.1.4",
+    "@bigoncloud/middleware": "^1.0.18",
     "knex": "^0.21.7",
     "pg": "^8.4.2"
   }
