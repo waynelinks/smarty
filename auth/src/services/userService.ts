@@ -19,3 +19,18 @@ export const createNewUser = async (payload: IUser): Promise<string | null> => {
 
   return createToken(user[0])
 }
+
+export const signinUser = async (payload: IUser): Promise<string | null> => {
+  const { email, password } = payload
+
+  const userExist = await FindUserByEmail(email)
+  if (userExist.length === 0) return null
+
+  const isValidPassword = await doPassword.check(
+    password,
+    userExist[0].password,
+  )
+  if (!isValidPassword) return null
+
+  return createToken(userExist[0])
+}
