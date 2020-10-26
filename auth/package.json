@@ -7,11 +7,18 @@
   "scripts": {
     "build": "yarn clean && tsc",
     "clean": "rimraf dist",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "test": "env-cmd -f .env.test jest --watchAll --no-cache --runInBand --detectOpenHandles"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.15",
     "@types/node": "^14.14.3",
+    "@types/supertest": "^2.0.10",
+    "eslint-plugin-jest": "^24.1.0",
+    "jest": "^26.6.1",
     "rimraf": "^3.0.2",
+    "supertest": "^5.0.0",
+    "ts-jest": "^26.4.2",
     "typescript": "^4.0.3"
   },
   "dependencies": {
