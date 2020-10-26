@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import { validate } from '../../middleware'
-import { register } from '../../controllers'
+import { register, signin } from '../../controllers'
 
 const router = Router()
 
