@@ -1,7 +1,7 @@
 {
   "name": "auth-service",
   "version": "1.0.0",
-  "description": "Basic authentication service",
+  "description": "Basic authentication microservice",
   "main": "dist/server.js",
   "license": "MIT",
   "engines": {
