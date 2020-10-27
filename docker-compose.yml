@@ -17,9 +17,7 @@ services:
   
   authsrv:
     container_name: auth
-    build: 
-      context: ./auth
-      dockerfile: dev.Dockerfile
+    build: /auth
     restart: always
     volumes:
       - authsrv:/usr/src/app
