@@ -17,7 +17,7 @@ services:
   
   authsrv:
     container_name: auth
-    build: /auth
+    build: ./auth
     restart: always
     volumes:
       - authsrv:/usr/src/app
