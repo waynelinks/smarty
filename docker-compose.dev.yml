@@ -14,13 +14,31 @@ services:
       - 5432:5432
     networks:
       - smarty
-  
+
+  dbAuthbackup:
+    container_name: dbAuth-BACKUP
+    image: prodrigestivill/postgres-backup-local
+    restart: always
+    user: postgres:postgres
+    volumes:
+        - /var/opt/pgbackups:/backups
+    depends_on:
+      - dbAuth
+    env_file:
+      - .env.dev     
+    networks:
+      - smarty
+
   authsrv:
     container_name: auth
+    depends_on: 
+     - dbAuth
     build: 
       context: ./auth
       dockerfile: dev.Dockerfile
     restart: on-failure
+    env_file:
+      - ./auth/.env.dev
     volumes:
       - authsrv:/app
     ports:
