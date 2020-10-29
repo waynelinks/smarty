@@ -1,15 +1,10 @@
-FROM node:12.19.0 as build
-
-COPY --chown=node:node . .
-RUN yarn install && yarn build
-
 FROM node:12.19.0-alpine
+ENV NODE_ENV=development
 
-RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY --chown=node:node . .
-USER node
-RUN yarn install
+COPY ["package.json", "yarn.lock*", "./"]
+RUN yarn install && mv node_modules ./
+COPY . .
 
 CMD ["yarn", "dev"]
