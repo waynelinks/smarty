@@ -6,7 +6,7 @@ services:
     image: postgres
     restart: always
     env_file:
-      - ./.env.dev
+      - .env.dev
     volumes:
       - ./auth.sql:/docker-entrypoint-initdb.d/init.sql
       - dbAuthData:/var/lib/postgresql/data
@@ -20,9 +20,9 @@ services:
     build: 
       context: ./auth
       dockerfile: dev.Dockerfile
-    restart: always
+    restart: on-failure
     volumes:
-      - authsrv:/usr/src/app
+      - authsrv:/app
     ports:
       - 3001:3001
     networks:

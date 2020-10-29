@@ -11,7 +11,7 @@
     "build": "yarn clean && tsc",
     "clean": "rimraf dist",
     "tsc": "tsc",
-    "start": "yarn build && env-cmd -f .env node dist/server.js",
+    "start": "yarn build && node dist/server.js",
     "dev": "env-cmd -f .env.dev tsnd --respawn ./src/server.ts",
     "dev:debug": "env-cmd -f .env.dev tsnd --inspect=4321 --respawn src/server.ts",
     "test": "env-cmd -f .env.test jest --watchAll --no-cache --runInBand --detectOpenHandles",

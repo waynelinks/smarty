@@ -6,7 +6,7 @@ services:
     image: postgres
     restart: always
     env_file:
-      - ./.env
+      - .env
     volumes:
       - ./auth.sql:/docker-entrypoint-initdb.d/init.sql
       - dbAuthData:/var/lib/postgresql/data
@@ -17,27 +17,31 @@ services:
   
   authsrv:
     container_name: auth
+    depends_on: 
+     - dbAuth
     build: ./auth
-    restart: always
+    restart: on-failure
+    env_file:
+      - ./auth/.env
     volumes:
-      - authsrv:/usr/src/app
+      - authsrv:/app
     ports:
       - 3001:3001
     networks:
       - smarty
 
-  pgAdmin:
-    container_name: pgAdmin
-    image: dpage/pgadmin4
-    restart: always
-    env_file:
-      - ./.env
-    volumes:
-      - pgAdminData:/var/lib/pgadmin
-    ports:
-      - 8080:80
-    networks:
-      - smarty
+  # pgAdmin:
+  #   container_name: pgAdmin
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - pgAdminData:/var/lib/pgadmin
+  #   ports:
+  #     - 8080:80
+  #   networks:
+  #     - smarty
 
 volumes:
   dbAuthData:
