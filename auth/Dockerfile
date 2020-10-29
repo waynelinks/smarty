@@ -1,15 +1,10 @@
-FROM node:12.19.0 as build
-
-COPY --chown=node:node . .
-RUN yarn install && yarn build
-
 FROM node:12.19.0-alpine
+ENV NODE_ENV=production
 
-RUN mkdir -p /usr/src/app && chown -R node:node /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY --chown=node:node --from=build ["dist", "package.json", "yarn.lock", "./"]
-USER node
-RUN yarn install --production
+COPY ["package.json", "yarn.lock*", "./"]
+RUN yarn install --production && mv node_modules ./
+COPY . .
 
-CMD ["node --max-old-space-size=1536", "dist/server.js"]
+CMD ["node", "dist/server.js"]
