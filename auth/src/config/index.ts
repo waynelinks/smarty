@@ -1,0 +1,9 @@
+export const { NODE_ENV } = process.env
+export const { PORT } = process.env
+export const { BASE_API_V1 } = process.env
+export const { DB_TABLE } = process.env
+export const { DB_URI } = process.env
+export const { ACCESS_TOKEN_SECRET } = process.env
+export const { ACCESS_TOKEN_EXPIRATION } = process.env
+export const { TOKEN_ISSUER } = process.env
+export const { TOKEN_AUDIENCE } = process.env

@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  dbAuth:
+    container_name: dbAuth
+    image: postgres
+    restart: always
+    env_file:
+      - .env.dev
+    volumes:
+      - ./auth.sql:/docker-entrypoint-initdb.d/init.sql
+      - dbAuthData:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - smarty
+
+  authsrv:
+    container_name: auth
+    depends_on: 
+     - dbAuth
+    build: 
+      context: ./auth
+      dockerfile: dev.Dockerfile
+    restart: on-failure
+    env_file:
+      - ./auth/.env.dev
+    volumes:
+      - authsrv:/app
+    ports:
+      - 3001:3001
+    networks:
+      - smarty
+
+  pgAdmin:
+    container_name: pgAdmin
+    image: dpage/pgadmin4
+    restart: always
+    env_file:
+      - ./.env.dev
+    volumes:
+      - pgAdminData:/var/lib/pgadmin
+    ports:
+      - 8080:80
+    networks:
+      - smarty
+
+volumes:
+  dbAuthData:
+  pgAdminData:
+  authsrv:
+
+networks:
+  smarty:
+    name: smarty
+    driver: bridge
